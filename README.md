@@ -1,104 +1,221 @@
-# ALX Listing App 03 - Booking Detail Page
+# ALX Listing App 04 - API Integration
 
-A fully functional booking detail page built with Next.js, React, TypeScript, and Tailwind CSS. This application simulates the booking flow of platforms like Airbnb and Booking.com.
+This project is an enhanced Airbnb clone that integrates with REST APIs to provide dynamic data fetching for property listings, property details, bookings, and reviews. This milestone transforms the project from a static prototype into a fully interactive application.
 
-## Features
+## 🚀 Features
 
-- **Responsive Booking Form**: Collects user contact information, payment details, and billing address
-- **Order Summary Component**: Displays property details, pricing breakdown, and total cost
-- **Cancellation Policy**: Shows refund policies and ground rules
-- **Mobile-First Design**: Fully responsive layout using Tailwind CSS
-- **TypeScript Support**: Type-safe components and props
-- **Modern UI/UX**: Clean design with focus states and hover effects
+### 🏠 Property Listings
+- Dynamic property listing fetched from `/api/properties`
+- Loading states and error handling
+- Responsive grid layout with property cards
+- Search and filter capabilities (ready for implementation)
 
-## Project Structure
+### 🏘️ Property Details
+- Dynamic property details fetched from `/api/properties/:id`
+- Property information, host details, and amenities
+- Dynamic routing based on property ID
+- Integrated review system
 
-```
-├── components/
-│   └── booking/
-│       ├── BookingForm.tsx          # Contact and payment form
-│       ├── OrderSummary.tsx         # Booking details and pricing
-│       └── CancellationPolicy.tsx   # Policy and ground rules
-├── pages/
-│   ├── booking/
-│   │   └── index.tsx               # Main booking page
-│   ├── _app.tsx                    # App wrapper with global styles
-│   └── index.tsx                   # Home page
-├── styles/
-│   └── globals.css                 # Global Tailwind CSS imports
-└── configuration files...
-```
+### 📝 Booking System
+- Interactive booking form with comprehensive validation
+- API integration for booking submission to `/api/bookings`
+- Real-time form state management
+- Success and error feedback with confirmation numbers
 
-## Components
+### ⭐ Reviews
+- Dynamic reviews fetched from `/api/properties/:id/reviews`
+- Star rating display system
+- User avatars and review dates
+- Loading and error states
 
-### BookingForm
-- Contact information (First Name, Last Name, Email, Phone)
-- Payment details (Card Number, Expiration Date, CVV)
-- Billing address (Street, City, State, ZIP, Country)
-- Responsive grid layout with form validation styling
+## 🔗 API Endpoints
 
-### OrderSummary
-- Property image and details
-- Review scores and booking dates
-- Price breakdown (booking fee, subtotal, total)
-- Sticky positioning on larger screens
+### Properties
+- `GET /api/properties` - Fetch all available properties
+- `GET /api/properties/:id` - Fetch specific property details by ID
 
-### CancellationPolicy
-- Cancellation terms and refund policies
-- Ground rules for guests
-- Clean typography and bullet points
+### Reviews  
+- `GET /api/properties/:id/reviews` - Fetch reviews for a specific property
 
-## Getting Started
+### Bookings
+- `POST /api/bookings` - Submit a new booking with validation
+
+## 🛠 Tech Stack
+
+- **Next.js 15.4.6** - React framework with SSR and dynamic routing
+- **TypeScript** - Type safety and enhanced development experience
+- **Axios** - Promise-based HTTP client for API requests
+- **Tailwind CSS 4.1.12** - Utility-first CSS framework
+- **React Hooks** - useState, useEffect for state management
+
+## 🚦 Getting Started
 
 1. **Install dependencies:**
-   ```bash
-   npm install
-   ```
+```bash
+npm install
+```
 
 2. **Run the development server:**
-   ```bash
-   npm run dev
-   ```
+```bash
+npm run dev
+```
 
-3. **Open your browser:**
-   Navigate to `http://localhost:3000`
+3. **Build for production:**
+```bash
+npm run build
+```
 
-4. **View the booking page:**
-   Go to `http://localhost:3000/booking`
+4. **Start production server:**
+```bash
+npm start
+```
 
-## Technologies Used
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-- **Next.js 15.4.6** - React framework for production
-- **React 19.1.1** - UI library
-- **TypeScript 5.9.2** - Type safety
-- **Tailwind CSS 4.1.12** - Utility-first CSS framework
-- **PostCSS & Autoprefixer** - CSS processing
+## 📁 Project Structure
 
-## Key Features Implemented
+```
+alx-listing-app-04/
+├── components/
+│   ├── booking/
+│   │   ├── BookingForm.tsx      # Enhanced form with API integration
+│   │   ├── CancellationPolicy.tsx
+│   │   └── OrderSummary.tsx
+│   └── property/
+│       ├── PropertyCard.tsx     # Reusable property display component
+│       ├── PropertyDetail.tsx   # Detailed property view
+│       └── ReviewSection.tsx    # Dynamic reviews with API integration
+├── pages/
+│   ├── api/                     # Mock API routes for development
+│   │   ├── bookings.ts         # Booking submission endpoint
+│   │   └── properties/
+│   │       ├── index.ts        # Properties listing endpoint
+│   │       ├── [id].ts         # Individual property endpoint
+│   │       └── [id]/
+│   │           └── reviews.ts  # Property reviews endpoint
+│   ├── booking/
+│   │   └── index.tsx           # Booking page with form integration
+│   ├── property/
+│   │   └── [id].tsx           # Dynamic property detail page
+│   ├── _app.tsx               # Application wrapper
+│   └── index.tsx              # Main property listings page
+├── types/
+│   └── index.ts               # TypeScript interface definitions
+└── styles/
+    └── globals.css            # Global styles and Tailwind imports
+```
 
-1. **Component-Based Architecture**: Modular, reusable React components
-2. **Responsive Design**: Mobile-first approach with Tailwind's grid system
-3. **Form Layout & Input Grouping**: Organized form sections with proper labeling
-4. **Dynamic Data Rendering**: Props-based component communication
-5. **Pricing Calculations**: Real-time total calculation display
-6. **Accessibility**: Proper form labels, focus states, and semantic HTML
+## 🎯 Key Implementation Details
 
-## Responsive Breakpoints
+### Dynamic Data Fetching
+- **Property Listings**: `pages/index.tsx` fetches and displays properties dynamically
+- **Property Details**: `pages/property/[id].tsx` uses Next.js dynamic routing
+- **Reviews**: `components/property/ReviewSection.tsx` loads reviews per property
+- **Booking**: `components/booking/BookingForm.tsx` submits to API with validation
 
-- **Mobile**: Single column layout, stacked components
-- **Tablet**: Responsive grid transitions
-- **Desktop**: Two-column layout with sticky order summary
+### State Management
+- Loading states for all API calls
+- Error handling with user-friendly messages
+- Form state management with controlled inputs
+- Success confirmations for completed actions
 
-## Future Enhancements
+### Type Safety
+- Comprehensive TypeScript interfaces in `types/index.ts`
+- Type-safe API responses and component props
+- Proper error type handling
 
-- Form validation and error handling
-- Payment processing integration
-- Backend API integration
-- User authentication
-- Booking confirmation flow
-- Email notifications
+## 🔧 Component Details
 
-## License
+### PropertyCard
+- Displays property thumbnail, title, location, price, and rating
+- Clickable navigation to property detail page
+- Responsive design with hover effects
 
-This project is part of the ALX Software Engineering program.
+### PropertyDetail
+- Comprehensive property information display
+- Host details and amenities section
+- Integrated review system
+- Call-to-action buttons
+
+### BookingForm
+- Multi-section form (Contact, Payment, Billing Address)
+- Real-time form validation
+- API submission with proper error handling
+- Success state with confirmation message
+
+### ReviewSection
+- Fetches reviews based on property ID
+- Star rating visualization
+- User information with avatars
+- Responsive review layout
+
+## 🎨 UI/UX Features
+
+- **Dark Mode**: Full dark mode support with toggle
+- **Loading States**: Smooth loading animations
+- **Error Handling**: Clear error messages with retry options
+- **Responsive Design**: Optimized for desktop, tablet, and mobile
+- **Form Validation**: Real-time input validation
+- **Visual Feedback**: Success and error state indicators
+
+## 📊 Mock API Data
+
+The project includes realistic mock data:
+- **6 Properties** with complete details (images, amenities, host info)
+- **Multiple Reviews** per property with ratings and comments
+- **Booking Validation** with confirmation number generation
+- **Simulated API Delays** for realistic user experience
+
+## 🔒 Error Handling
+
+Comprehensive error handling includes:
+- Network connectivity issues
+- API endpoint failures
+- Form validation errors
+- Missing or invalid data
+- User-friendly error messages
+- Retry mechanisms
+
+## 🧪 Testing the Application
+
+### Property Listings
+1. Visit the home page to see dynamic property loading
+2. Wait for the loading state to complete
+3. Click on any property card to view details
+
+### Property Details
+1. Navigate to `/property/1` (or any property ID 1-6)
+2. View dynamic property information
+3. Scroll down to see reviews loading dynamically
+
+### Booking System
+1. Go to `/booking` or click "Book Now" from property details
+2. Fill out the booking form
+3. Submit to see API integration in action
+4. Observe loading states and success confirmation
+
+## 🚀 Production Deployment
+
+The application is ready for deployment to platforms like:
+- Vercel (recommended for Next.js)
+- Netlify
+- AWS Amplify
+- Docker containers
+
+## 📝 Learning Outcomes
+
+This milestone demonstrates:
+- REST API integration patterns
+- React state management with hooks
+- TypeScript for type safety
+- Form handling and validation
+- Error boundary implementation
+- Responsive design principles
+- Modern React/Next.js development practices
+
+---
+
+**Project**: ALX Software Engineering Program - Milestone 4  
+**Focus**: API Integration and Dynamic Data Handling  
+**Status**: ✅ Complete
 
